@@ -25,15 +25,15 @@ function [X_norm, mu, sigma] = featureNormalize(X)
 %
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
-X_norm = X
+X_norm = X;
 dimension = size(X,2);
-len = length(X)
+len = length(X);
 mu = zeros(dimension,1);
 sigma = zeros(dimension,1);
 for i=1:dimension
-  mu(i) = sum(X(:,i))/len
-  sigma(i) = std(X(:,i))
-  X_norm(:,i)=(X(:,i)-mu(i))/sigma(i)
+  mu(i) = sum(X(:,i))/len;
+  sigma(i) = std(X(:,i));
+  X_norm(:,i)=(X(:,i)-mu(i))/sigma(i);
 end
 
 

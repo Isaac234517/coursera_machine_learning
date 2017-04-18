@@ -8,14 +8,14 @@ m = length(y); % number of training examples
 
 % You need to return the following variables correctly 
 J = 0;
-
+dimension = size(X,2);
 % ====================== YOUR CODE HERE ======================
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
+tmp = (X*theta)-y;
+sigma_sum = sum(tmp.^2);
 
-
-
-
+J= J+(1/(2*m))*sigma_sum;
 
 % =========================================================================
 
