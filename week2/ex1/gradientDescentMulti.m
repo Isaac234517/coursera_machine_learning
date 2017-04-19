@@ -7,9 +7,8 @@ function [theta, J_history] = gradientDescentMulti(X, y, theta, alpha, num_iters
 m = length(y); % number of training examples
 J_history = zeros(num_iters, 1);
 dimension = size(X,2);
-tmp = zeros(dimension,1);
 for iter = 1:num_iters
-
+    tmp = theta;
     % ====================== YOUR CODE HERE ======================
     % Instructions: Perform a single gradient step on the parameter vector
     %               theta. 
@@ -18,8 +17,7 @@ for iter = 1:num_iters
     %       of the cost function (computeCostMulti) and gradient here.
     %
     for(i=1:dimension)
-      tmp(i) = theta(i) - alpha * (1/m) * sum(((X * theta)-y).* X(:,i));
-      theta(i) = tmp(i);
+      theta(i) = tmp(i) - alpha * (1/m) * sum(((X * tmp)-y).* X(:,i));
     end
 
     % ============================================================
