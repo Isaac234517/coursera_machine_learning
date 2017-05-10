@@ -20,7 +20,9 @@ z = X* theta;
 % Note: grad should have the same dimensions as theta
 hypothesis = sigmoid(z);
 
-hypothesis;
+J = (1/m) * sum(-y' * log(hypothesis) - (1-y)' * log(1-hypothesis));
+
+grad = (1/m) * sum((hypothesis-y).*X);
 
 
 
