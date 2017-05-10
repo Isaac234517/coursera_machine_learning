@@ -16,10 +16,16 @@ grad = zeros(size(theta));
 %               You should set J to the cost.
 %               Compute the partial derivatives and set grad to the partial
 %               derivatives of the cost w.r.t. each parameter in theta
+z = X * theta;
+theta
+hypothesis = 1./(1+exp(-z));
+J = (1/m) * sum (-y' * log(hypothesis) -(1-y)' * log(1-hypothesis)) +  (lambda/(2*m)) * sum(theta.^2);
+%grad = (1/m) * sum((hypothesis - y).*X) + ((lambda/m) * theta);
+grad(1) = (1/m) * sum(X'(1,:) *(hypothesis-y));
 
-
-
-
+for j=2:size(grad);
+  grad(j) = (1/m) * sum(X'(j,:)* (hypothesis-y)) + ((lambda/m) * theta(j,1));
+end
 
 
 % =============================================================
