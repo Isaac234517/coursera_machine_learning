@@ -52,5 +52,5 @@ z = X * theta;
 hypothesis = sigmoid(z);
 J = (1/m) *sum( (-y' * log(hypothesis)) - ((1-y)' * (log(1-hypothesis)))) + (lambda/(2*m)) * sum(theta(2:(length(theta))).^2);
 grad(1) = 1/(m) * sum((hypothesis-y) .* X(:,1));
-grad(2:length(grad)) = ((1/m) * sum((hypothesis-y).*(X(:,(2:size(X)(2)))))) + ((lambda/m) * theta(2:(length(theta))))'
+grad(2:length(grad)) = ((1/m) * sum((hypothesis-y).*(X(:,(2:size(X)(2)))))) + ((lambda/m) * theta(2:(length(theta))))';
 end
