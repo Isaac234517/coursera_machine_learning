@@ -68,39 +68,36 @@ end
 
 for  i=1:m
   a1=[1 X(i,:)];
-  z2 = a1 * Theta1';
-  a2 = [1 sigmoid(z2)];
-  z3 =  a2 * Theta2';
+  z2 = Theta1 * a1';
+  a2 = [1;sigmoid(z2)];
+  z3 =  Theta2 * a2;
   a3 = sigmoid(z3);
-  part1 = -y_v(i,:).*log(a3);
-  part2 = (1-y_v(i,:)).*(log(1-a3));
+  part1 = -y_v(i,:)'.*log(a3);
+  part2 = (1-y_v(i,:))'.*(log(1-a3));
   J=J+sum(part1-part2);
 end
 J=J/m;
-Theta1=Theta1(:,(2:size(Theta1,2)));
-Theta2=Theta2(:,(2:size(Theta2,2)));
-regular_part = (lambda/(2*m)) *(sum(sum((Theta1.^2)')) + sum(sum((Theta2.^2)')));
+Theta1_no_bias=Theta1(:,(2:size(Theta1,2)));
+Theta2_no_bias=Theta2(:,(2:size(Theta2,2)));
+regular_part = (lambda/(2*m)) *(sum(sum((Theta1_no_bias.^2)')) + sum(sum((Theta2_no_bias.^2)')));
 J=J+regular_part;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+for t=1:m
+  a1=[1 X(t,:)];
+  z2 = Theta1 * a1';
+  a2 = [1;sigmoid(z2)];
+  z3 = Theta2 * a2;
+  a3 = sigmoid(z3);
+  delta3 = a3 - y_v(t,:)';
+  delta2 = Theta2' * delta3.* [1;sigmoidGradient(z2)];
+  delta2 = delta2(2:end);
+  Theta1_grad = Theta1_grad + delta2 * a1;
+  Theta2_grad = Theta2_grad + delta3 * a2';
+end
 % -------------------------------------------------------------
 
+Theta1_grad = (1/m) * Theta1_grad;
+Theta2_grad = (1/m) * Theta2_grad;
 % =========================================================================
 
 % Unroll gradients
