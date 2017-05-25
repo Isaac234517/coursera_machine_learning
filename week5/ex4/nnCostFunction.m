@@ -76,8 +76,11 @@ for  i=1:m
   part2 = (1-y_v(i,:)).*(log(1-a3));
   J=J+sum(part1-part2);
 end
-J
 J=J/m;
+Theta1=Theta1(:,(2:size(Theta1,2)));
+Theta2=Theta2(:,(2:size(Theta2,2)));
+regular_part = (lambda/(2*m)) *(sum(sum((Theta1.^2)')) + sum(sum((Theta2.^2)')));
+J=J+regular_part;
 
 
 
