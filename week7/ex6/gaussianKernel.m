@@ -16,8 +16,9 @@ sim = 0;
 %
 %
 
-
-
+numerator = sum((x1-x2).^2);
+demoniator = 2 * sigma^2;
+sim = exp(-(numerator/demoniator));
 
 
 
