@@ -20,7 +20,13 @@ idx = zeros(size(X,1), 1);
 %
 % Note: You can use a for-loop over the examples to compute this.
 %
-
+for i=1:size(X,1)
+  tmp = zeros(K,1);
+  for j=1:K
+    tmp(j) = sqrt(sum((centroids(j,:) - X(i,:)).^2));
+  end
+  [value, idx(i)] = min(tmp);
+end
 
 
 
