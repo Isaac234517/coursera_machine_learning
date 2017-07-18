@@ -40,8 +40,12 @@ Theta_grad = zeros(size(Theta));
 %                     partial derivatives w.r.t. to each element of Theta
 %
 
+Cost_Temp = (X * Theta') -Y;
 
+J = (sum(sum((Cost_Temp(R==1)).^2)))/2 + (lambda/2) * (sum((sum(Theta.^2))) + sum((sum(X.^2))));
 
+X_grad = (Cost_Temp.*R) * Theta + lambda .* X;
+Theta_grad = (Cost_Temp.*R)' * X + lambda .* Theta;
 
 
 
